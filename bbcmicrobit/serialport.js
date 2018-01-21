@@ -1,3 +1,5 @@
+//https://makecode.microbit.org/#
+
 input.calibrateCompass()
 basic.showIcon(IconNames.Yes)
 basic.forever(() => {

@@ -22,9 +22,9 @@ MainWindow::MainWindow(QWidget *parent) :
     m_serial->setFlowControl(QSerialPort::NoFlowControl);
 
     if (m_serial->open(QIODevice::ReadWrite)) {
-        std::printf("OK\n");
+        ui->labelDBus->setText("connected");
    } else {
-        std::printf("nope :-(\n");
+        ui->labelDBus->setText("could not connect");
     }
     x=0;
     y=0;
@@ -43,9 +43,9 @@ void MainWindow::timerEvent(QTimerEvent *event)
 {
     Q_UNUSED(event);
     if (OpenSCAD->isValid())
-        ui->label->setText("connected");
+        ui->labelDBus->setText("connected");
     else
-        ui->label->setText("disconnected");
+        ui->labelDBus->setText("disconnected");
 
     char buf[1024];
 
