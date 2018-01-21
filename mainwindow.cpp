@@ -90,14 +90,18 @@ void MainWindow::timerEvent(QTimerEvent *event)
 	ui->progressBarY->setValue(y);
 	ui->progressBarZ->setValue(z);
 
-	double xa = y*90/1024.0;
-	double ya =-x*90/1024.0;
+	//double xa = y*90/1024.0;
+	//double ya =-x*90/1024.0;
 	
-	if(z>0){
-		ya =180-ya;
-	}
-	double a = cos(phi*PI/180) * xa - sin(phi*PI/180) * ya;
-	double b = sin(phi*PI/180) * xa - cos(phi*PI/180) * ya;
+	//if(z>0){
+	//	ya =180-ya;
+	//}
+	//double a = cos(phi*PI/180) * xa - sin(phi*PI/180) * ya;
+	//double b = sin(phi*PI/180) * xa - cos(phi*PI/180) * ya;
+	//double c = -phi;
+	//https://www.nxp.com/docs/en/application-note/AN3461.pdf
+	double a = atan2(+y,  -z)/PI*180.0;
+	double b = atan2(x,  sqrt(pow(y,2.0)+pow(z,2.0)))/PI*180.0;
 	double c = -phi;
 
 	a = constrainAngle(a);
