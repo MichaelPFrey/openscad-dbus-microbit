@@ -5,6 +5,13 @@
 
 #define PI 3.14159265
 
+double constrainAngle(double x){
+    x = fmod(x,360);
+    if (x < 0)
+        x += 360;
+    return x;
+}
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -78,23 +85,30 @@ void MainWindow::timerEvent(QTimerEvent *event)
 	}
 	phi = phiRaw - phiOff;
 
-	ui->progressBarPhi->setValue(phi);
+	ui->progressBarPhi->setValue(phiRaw);
 	ui->progressBarX->setValue(x);
 	ui->progressBarY->setValue(y);
 	ui->progressBarZ->setValue(z);
 
 	double xa = y*90/1024.0;
 	double ya =-x*90/1024.0;
-	double b = - sin(phi*PI/180) * xa - cos(phi*PI/180) * ya;
-	double a = cos(phi*PI/180) * xa + sin(phi*PI/180) * ya;
-	if(z>500){
-		b = b+180;
+	
+	if(z>0){
+		ya =180-ya;
 	}
-	OpenSCAD->rotateTo(
-		a,
-		b,
-		-phi
-		);
+	double a = cos(phi*PI/180) * xa - sin(phi*PI/180) * ya;
+	double b = sin(phi*PI/180) * xa - cos(phi*PI/180) * ya;
+	double c = -phi;
+
+	a = constrainAngle(a);
+	b = constrainAngle(b);
+	c = constrainAngle(c);
+
+	ui->progressBarA->setValue(a);
+	ui->progressBarB->setValue(b);
+	ui->progressBarC->setValue(c);
+
+	OpenSCAD->rotateTo(a,b,c);
 }
 
 void MainWindow::readData()
