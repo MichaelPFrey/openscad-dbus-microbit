@@ -33,6 +33,8 @@ private:
     int x;
     int y;
     int z;
+    bool aButton;
+    bool bButton;
     double a; 
     double b;
     double c; 

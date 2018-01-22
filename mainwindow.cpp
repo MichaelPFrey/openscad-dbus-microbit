@@ -39,7 +39,8 @@ MainWindow::MainWindow(QWidget *parent) :
     phi=0;
     phiOff=0;
     startTimer(100);
-
+	aButton = false;
+	bButton = false;
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(timerEventSerial()));
     timer->start(25);
@@ -58,6 +59,18 @@ void MainWindow::timerEvent(QTimerEvent *event)
     else
         ui->labelDBus->setText("disconnected");
 
+	if(aButton){
+		ui->labelAButton->setText("A Button\nPressed");
+	}else{
+		ui->labelAButton->setText("A Button\n");
+	}
+
+	if(bButton){
+		ui->labelBButton->setText("B Button\nPressed");
+	}else{
+		ui->labelBButton->setText("B Button\n");
+	}
+
 	ui->progressBarPhi->setValue(phiRaw);
 	ui->progressBarX->setValue(x);
 	ui->progressBarY->setValue(y);
@@ -69,8 +82,6 @@ void MainWindow::timerEvent(QTimerEvent *event)
 }
 
 void MainWindow::timerEventSerial(){
-  bool as= false;
-  bool bs=false;
     char buf[1024];
 
     while(m_serial->canReadLine()){
@@ -89,12 +100,12 @@ void MainWindow::timerEventSerial(){
 		}else if(el=="z"){
 			z=elemts[1].toInt();
 		}else if(el=="A"){
-			as = (elemts[1].contains("true",Qt::CaseInsensitive));
+			aButton = (elemts[1].contains("true",Qt::CaseInsensitive));
 		}else if(el=="B"){
-			bs = (elemts[1].contains("true",Qt::CaseInsensitive));
+			bButton = (elemts[1].contains("true",Qt::CaseInsensitive));
 		}
    }
-	if(as){
+	if(aButton){
 		phiOff = phiRaw;
 	}
 	phi = phiRaw - phiOff;
