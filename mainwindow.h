@@ -19,6 +19,7 @@ public:
 
 private slots:
     void readData();
+    void timerEventSerial();
 
 protected:
     void timerEvent(QTimerEvent *event);
@@ -32,6 +33,9 @@ private:
     int x;
     int y;
     int z;
+    double a; 
+    double b;
+    double c; 
     int phiOff;
 };
 

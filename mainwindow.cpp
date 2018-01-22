@@ -38,7 +38,11 @@ MainWindow::MainWindow(QWidget *parent) :
     z=0;
     phi=0;
     phiOff=0;
-    startTimer(25);
+    startTimer(100);
+
+    QTimer *timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(timerEventSerial()));
+    timer->start(25);
 }
 
 MainWindow::~MainWindow()
@@ -54,10 +58,20 @@ void MainWindow::timerEvent(QTimerEvent *event)
     else
         ui->labelDBus->setText("disconnected");
 
-    char buf[1024];
+	ui->progressBarPhi->setValue(phiRaw);
+	ui->progressBarX->setValue(x);
+	ui->progressBarY->setValue(y);
+	ui->progressBarZ->setValue(z);
 
+	ui->progressBarA->setValue(a);
+	ui->progressBarB->setValue(b);
+	ui->progressBarC->setValue(c);
+}
+
+void MainWindow::timerEventSerial(){
   bool as= false;
   bool bs=false;
+    char buf[1024];
 
     while(m_serial->canReadLine()){
         m_serial->readLine(buf, sizeof(buf));
@@ -85,26 +99,13 @@ void MainWindow::timerEvent(QTimerEvent *event)
 	}
 	phi = phiRaw - phiOff;
 
-	ui->progressBarPhi->setValue(phiRaw);
-	ui->progressBarX->setValue(x);
-	ui->progressBarY->setValue(y);
-	ui->progressBarZ->setValue(z);
-
-	//double xa = y*90/1024.0;
-	//double ya =-x*90/1024.0;
-	
-
-	//double a = cos(phi*PI/180) * xa - sin(phi*PI/180) * ya;
-	//double b = sin(phi*PI/180) * xa - cos(phi*PI/180) * ya;
-	//double c = -phi;
-	
 	double xs = cos(phi*PI/180) * x + sin(phi*PI/180) * y;
 	double ys = sin(phi*PI/180) * x + cos(phi*PI/180) * y;
 	
 	//https://www.nxp.com/docs/en/application-note/AN3461.pdf
-	double a = atan2(+ys,  -z)/PI*180.0;
-	double b = atan2(+xs,  sqrt(pow(ys,2.0)+pow(z,2.0)))/PI*180.0;
-	double c = -phi;
+	a = atan2(+ys,  -z)/PI*180.0;
+	b = atan2(+xs,  sqrt(pow(ys,2.0)+pow(z,2.0)))/PI*180.0;
+	c = -phi;
 
 	if(z>0){
 		a =-a;
@@ -114,13 +115,8 @@ void MainWindow::timerEvent(QTimerEvent *event)
 	b = constrainAngle(b);
 	c = constrainAngle(c);
 
-	ui->progressBarA->setValue(a);
-	ui->progressBarB->setValue(b);
-	ui->progressBarC->setValue(c);
-
 	OpenSCAD->rotateTo(a,b,c);
 }
-
 void MainWindow::readData()
 {
 
