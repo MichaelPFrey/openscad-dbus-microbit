@@ -6,58 +6,60 @@
 #define PI 3.14159265
 
 double constrainAngle(double x){
-    x = fmod(x,360);
-    if (x < 0)
-        x += 360;
-    return x;
+	x = fmod(x,360);
+	if (x < 0)
+		x += 360;
+	return x;
 }
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+	QMainWindow(parent),
+	ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
+	ui->setupUi(this);
 
-    OpenSCAD = new org::openscad::OpenSCAD("org.openscad.OpenSCAD", "/org/openscad/OpenSCAD/Application",
-                           QDBusConnection::sessionBus(), this);
-    m_serial=(new QSerialPort(this));
-    m_serial->setPortName("/dev/ttyACM0");
-    m_serial->setBaudRate(QSerialPort::Baud115200);
-    m_serial->setDataBits(QSerialPort::Data8);
-    m_serial->setParity(QSerialPort::NoParity);
-    m_serial->setStopBits(QSerialPort::OneStop);
-    m_serial->setFlowControl(QSerialPort::NoFlowControl);
+	OpenSCAD = new org::openscad::OpenSCAD("org.openscad.OpenSCAD", "/org/openscad/OpenSCAD/Application",
+						   QDBusConnection::sessionBus(), this);
+	m_serial=(new QSerialPort(this));
+	m_serial->setPortName("/dev/ttyACM0");
+	m_serial->setBaudRate(QSerialPort::Baud115200);
+	m_serial->setDataBits(QSerialPort::Data8);
+	m_serial->setParity(QSerialPort::NoParity);
+	m_serial->setStopBits(QSerialPort::OneStop);
+	m_serial->setFlowControl(QSerialPort::NoFlowControl);
 
-    if (m_serial->open(QIODevice::ReadWrite)) {
-        ui->labelDBus->setText("connected");
+	if (m_serial->open(QIODevice::ReadWrite)) {
+		ui->labelDBus->setText("connected");
    } else {
-        ui->labelDBus->setText("could not connect");
-    }
-    x=0;
-    y=0;
-    z=0;
-    phi=0;
-    phiOff=0;
-    startTimer(100);
+		ui->labelDBus->setText("could not connect");
+	}
+	x=0;
+	y=0;
+	z=0;
+	phi=0;
+	phiOff=0;
+	startTimer(100);
 	aButton = false;
 	bButton = false;
-    QTimer *timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(timerEventSerial()));
-    timer->start(25);
+	QTimer *timer = new QTimer(this);
+	connect(timer, SIGNAL(timeout()), this, SLOT(timerEventSerial()));
+	timer->start(25);
 }
 
 MainWindow::~MainWindow()
 {
-    delete ui;
+	delete ui;
 }
 
 void MainWindow::timerEvent(QTimerEvent *event)
 {
-    Q_UNUSED(event);
-    if (OpenSCAD->isValid())
-        ui->labelDBus->setText("connected");
-    else
-        ui->labelDBus->setText("disconnected");
+	Q_UNUSED(event);
+
+	if(OpenSCAD->isValid()){
+		ui->labelDBus->setText("connected");
+	}else{
+		ui->labelDBus->setText("disconnected");
+	}
 
 	if(aButton){
 		ui->labelAButton->setText("A Button\nPressed");
@@ -82,12 +84,12 @@ void MainWindow::timerEvent(QTimerEvent *event)
 }
 
 void MainWindow::timerEventSerial(){
-    char buf[1024];
+	char buf[1024];
 
-    while(m_serial->canReadLine()){
-        m_serial->readLine(buf, sizeof(buf));
+	while(m_serial->canReadLine()){
+		m_serial->readLine(buf, sizeof(buf));
 
-        QString line =  QString(buf);
+		QString line =  QString(buf);
 		QStringList elemts = line.split(":");
 		QString el = elemts[0];
 
@@ -110,6 +112,10 @@ void MainWindow::timerEventSerial(){
 	}
 	phi = phiRaw - phiOff;
 
+	if(z>0){
+		phi = 180-phi;
+	}
+
 	double xs = cos(phi*PI/180) * x + sin(phi*PI/180) * y;
 	double ys = sin(phi*PI/180) * x + cos(phi*PI/180) * y;
 	
@@ -119,7 +125,7 @@ void MainWindow::timerEventSerial(){
 	c = -phi;
 
 	if(z>0){
-		a =-a;
+		b =-b;
 	}
 
 	a = constrainAngle(a);
@@ -127,8 +133,4 @@ void MainWindow::timerEventSerial(){
 	c = constrainAngle(c);
 
 	OpenSCAD->rotateTo(a,b,c);
-}
-void MainWindow::readData()
-{
-
 }
