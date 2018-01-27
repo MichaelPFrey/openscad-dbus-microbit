@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>388</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,7 +15,15 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout_2">
-    <item row="5" column="0">
+    <item row="3" column="0">
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>Button
+state</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="0">
      <widget class="QLabel" name="label_3">
       <property name="text">
        <string>x</string>
@@ -25,49 +33,7 @@
       </property>
      </widget>
     </item>
-    <item row="11" column="1">
-     <widget class="QProgressBar" name="progressBarB">
-      <property name="maximum">
-       <number>360</number>
-      </property>
-      <property name="value">
-       <number>24</number>
-      </property>
-      <property name="format">
-       <string>%v</string>
-      </property>
-     </widget>
-    </item>
-    <item row="10" column="1">
-     <widget class="QProgressBar" name="progressBarA">
-      <property name="maximum">
-       <number>360</number>
-      </property>
-      <property name="value">
-       <number>24</number>
-      </property>
-      <property name="format">
-       <string>%v</string>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="1">
-     <widget class="QProgressBar" name="progressBarZ">
-      <property name="minimum">
-       <number>-1024</number>
-      </property>
-      <property name="maximum">
-       <number>1023</number>
-      </property>
-      <property name="value">
-       <number>24</number>
-      </property>
-      <property name="format">
-       <string>%v</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="0">
+    <item row="9" column="0">
      <widget class="QLabel" name="label_4">
       <property name="text">
        <string>y</string>
@@ -77,23 +43,7 @@
       </property>
      </widget>
     </item>
-    <item row="5" column="1">
-     <widget class="QProgressBar" name="progressBarX">
-      <property name="minimum">
-       <number>-1024</number>
-      </property>
-      <property name="maximum">
-       <number>1023</number>
-      </property>
-      <property name="value">
-       <number>24</number>
-      </property>
-      <property name="format">
-       <string>%v</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="0">
+    <item row="7" column="0">
      <widget class="QLabel" name="label_2">
       <property name="text">
        <string>Magnet</string>
@@ -103,33 +53,7 @@
       </property>
      </widget>
     </item>
-    <item row="6" column="1">
-     <widget class="QProgressBar" name="progressBarY">
-      <property name="minimum">
-       <number>-1024</number>
-      </property>
-      <property name="maximum">
-       <number>1023</number>
-      </property>
-      <property name="value">
-       <number>24</number>
-      </property>
-      <property name="format">
-       <string>%v</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QLabel" name="labelDBus">
-      <property name="text">
-       <string>Controller</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="0">
+    <item row="10" column="0">
      <widget class="QLabel" name="label_5">
       <property name="text">
        <string>z</string>
@@ -155,26 +79,6 @@
       </property>
      </widget>
     </item>
-    <item row="4" column="1">
-     <widget class="QProgressBar" name="progressBarPhi">
-      <property name="maximum">
-       <number>360</number>
-      </property>
-      <property name="value">
-       <number>24</number>
-      </property>
-      <property name="format">
-       <string>%v</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0" colspan="2">
-     <widget class="Line" name="line">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </item>
     <item row="1" column="0">
      <widget class="QLabel" name="label_8">
       <property name="font">
@@ -191,40 +95,7 @@
       </property>
      </widget>
     </item>
-    <item row="3" column="0" colspan="2">
-     <widget class="QLabel" name="label_9">
-      <property name="font">
-       <font>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>Raw Data</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QLabel" name="labelSerial">
-      <property name="text">
-       <string>Controller</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="8" column="0" colspan="2">
-     <widget class="Line" name="line_2">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="9" column="0" colspan="2">
+    <item row="12" column="0" colspan="2">
      <widget class="QLabel" name="label_10">
       <property name="font">
        <font>
@@ -240,8 +111,109 @@
       </property>
      </widget>
     </item>
-    <item row="12" column="1">
-     <widget class="QProgressBar" name="progressBarC">
+    <item row="13" column="0">
+     <widget class="QLabel" name="label_7">
+      <property name="text">
+       <string>A</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="14" column="0">
+     <widget class="QLabel" name="label_11">
+      <property name="text">
+       <string>B</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="15" column="0">
+     <widget class="QLabel" name="label_12">
+      <property name="text">
+       <string>C</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QLabel" name="labelAButton">
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="2">
+     <widget class="QLabel" name="labelBButton">
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1" colspan="2">
+     <widget class="QLabel" name="labelSerial">
+      <property name="text">
+       <string>Controller</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1" colspan="2">
+     <widget class="QLabel" name="labelDBus">
+      <property name="text">
+       <string>Controller</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0" colspan="3">
+     <widget class="Line" name="line_3">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0" colspan="3">
+     <widget class="Line" name="line">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="0" colspan="3">
+     <widget class="Line" name="line_2">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="0" colspan="3">
+     <widget class="QLabel" name="label_9">
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Raw Data</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="1" colspan="2">
+     <widget class="QProgressBar" name="progressBarPhi">
       <property name="maximum">
        <number>360</number>
       </property>
@@ -253,33 +225,90 @@
       </property>
      </widget>
     </item>
-    <item row="10" column="0">
-     <widget class="QLabel" name="label_7">
-      <property name="text">
-       <string>A</string>
+    <item row="8" column="1" colspan="2">
+     <widget class="QProgressBar" name="progressBarX">
+      <property name="minimum">
+       <number>-1024</number>
       </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
+      <property name="maximum">
+       <number>1023</number>
       </property>
-     </widget>
-    </item>
-    <item row="11" column="0">
-     <widget class="QLabel" name="label_11">
-      <property name="text">
-       <string>B</string>
+      <property name="value">
+       <number>24</number>
       </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
+      <property name="format">
+       <string>%v</string>
       </property>
      </widget>
     </item>
-    <item row="12" column="0">
-     <widget class="QLabel" name="label_12">
-      <property name="text">
-       <string>C</string>
+    <item row="9" column="1" colspan="2">
+     <widget class="QProgressBar" name="progressBarY">
+      <property name="minimum">
+       <number>-1024</number>
       </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
+      <property name="maximum">
+       <number>1023</number>
+      </property>
+      <property name="value">
+       <number>24</number>
+      </property>
+      <property name="format">
+       <string>%v</string>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="1" colspan="2">
+     <widget class="QProgressBar" name="progressBarZ">
+      <property name="minimum">
+       <number>-1024</number>
+      </property>
+      <property name="maximum">
+       <number>1023</number>
+      </property>
+      <property name="value">
+       <number>24</number>
+      </property>
+      <property name="format">
+       <string>%v</string>
+      </property>
+     </widget>
+    </item>
+    <item row="13" column="1" colspan="2">
+     <widget class="QProgressBar" name="progressBarA">
+      <property name="maximum">
+       <number>360</number>
+      </property>
+      <property name="value">
+       <number>24</number>
+      </property>
+      <property name="format">
+       <string>%v</string>
+      </property>
+     </widget>
+    </item>
+    <item row="14" column="1" colspan="2">
+     <widget class="QProgressBar" name="progressBarB">
+      <property name="maximum">
+       <number>360</number>
+      </property>
+      <property name="value">
+       <number>24</number>
+      </property>
+      <property name="format">
+       <string>%v</string>
+      </property>
+     </widget>
+    </item>
+    <item row="15" column="1" colspan="2">
+     <widget class="QProgressBar" name="progressBarC">
+      <property name="maximum">
+       <number>360</number>
+      </property>
+      <property name="value">
+       <number>24</number>
+      </property>
+      <property name="format">
+       <string>%v</string>
       </property>
      </widget>
     </item>

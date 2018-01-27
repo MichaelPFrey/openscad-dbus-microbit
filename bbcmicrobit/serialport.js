@@ -1,7 +1,8 @@
 //https://makecode.microbit.org/#
 
+basic.showString("SERIAL")
 input.calibrateCompass()
-basic.showIcon(IconNames.Yes)
+
 basic.forever(() => {
     serial.writeValue("x", input.acceleration(Dimension.X))
     serial.writeValue("y", input.acceleration(Dimension.Y))
@@ -17,5 +18,5 @@ basic.forever(() => {
     } else {
         serial.writeString("B:false\r\n")
     }
-    basic.pause(50)
+    basic.pause(20)
 })
