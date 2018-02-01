@@ -12,11 +12,25 @@ Building is as simple as
 This program is using the QT Modul Serial Port.
 You may need a newer qmake then the one supplied with your linux distribution.
 
-## prgogramming the BBC:MicroBit
+## programming the BBC:MicroBit
 The source code is found under bbcmicrobit/serialport.js
 The code can be compiled under https://makecode.microbit.org/
 
 If you want to skip that step, there is also a hex file provided.
+
+## Serial // Permission
+The BBC Micro:Bit and this programm communicate via (virtual) serial port.
+
+You can check the basic communication betwhen the Micro:Bit and the
+computer with a serial monitor like CuteCom.
+
+If you get an error like "Permission denied", check if your current user
+is part of the group "dialout". To check, you can use
+  groups ${USER}
+If you have sudo privileges, but not dialout, you can add your
+self to the group dial out:
+  sudo gpasswd --add ${USER} dialout
+(offcourse, replace USER with your own User name)
 
 ## Technical Details
 The BBC Micro:Bit is offering an accelerometer and a magnetometer.
